@@ -1,24 +1,13 @@
 import pathlib
-from setuptools import find_packages, setup
-import re
+from setuptools import setup
 
-README = (pathlib.Path(__file__).parent / "README.md").read_text()
-
-PACKAGE_NAME = "opentele"
-VERSION = "1.15.1"
-SOURCE_DIRECTORY = "src"
-
-with open("requirements.txt") as data:
-    requirements = [
-        line for line in data.read().split("\n") if line and not line.startswith("#")
-    ]
 
 setup(
-    name=PACKAGE_NAME,
-    version=VERSION,
+    name="opentele",
+    version="1.15.2",
     license="MIT",
     description="A Python Telegram API Library for converting between tdata and telethon sessions, with built-in official Telegram APIs.",
-    long_description=README,
+    long_description=(pathlib.Path(__file__).parent / "README.md").read_text(),
     long_description_content_type="text/markdown",
     url="https://github.com/thedemons/opentele",
     author="thedemons",
@@ -40,7 +29,17 @@ setup(
         "opentele",
     ],
     include_package_data=True,
-    packages=[PACKAGE_NAME],
-    package_dir={PACKAGE_NAME: SOURCE_DIRECTORY},
-    install_requires=requirements,
+    packages=[
+        "opentele",
+        "opentele.td",
+        "opentele.tl",
+    ],
+    package_dir={
+        "opentele": "src"
+    },
+    install_requires=[
+        "pyqt6",
+        "telethon",
+        "tgcrypto",
+    ]
 )
